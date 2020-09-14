@@ -51,12 +51,6 @@ export default {
   computed: {
     ...mapGetters('dashboard', ['oldAndOneTimeCoupons'])
   },
-  watch: {
-    oldAndOneTimeCoupons(val) {
-      console.log('changed');
-      console.log(val);
-    }
-  },
   methods: {
     ...mapActions('dashboard', ['editCoupon'])
   }

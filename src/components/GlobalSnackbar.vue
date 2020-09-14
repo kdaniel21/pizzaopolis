@@ -21,11 +21,6 @@ export default {
   computed: {
     ...mapState(['snackbar'])
   },
-  watch: {
-    snackbar() {
-      console.log('triggered');
-    }
-  },
   methods: {
     ...mapMutations(['closeSnackbar'])
   }

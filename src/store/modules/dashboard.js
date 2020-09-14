@@ -19,7 +19,6 @@ export default {
       );
     },
     oldAndOneTimeCoupons: state => {
-      console.log('returning');
       if (!state.coupons) return [];
 
       return state.coupons.filter(
@@ -73,13 +72,15 @@ export default {
         return (state.coupons = [...coupon]);
       }
 
-      state.coupons = [...state.coupons, coupon];
-      // const index = state.coupons.findIndex(item => item.id === coupon.id);
-      // if (index === -1) {
-      //   return state.coupons.push(coupon);
-      // }
+      // state.coupons = [...state.coupons, coupon];
+      const index = state.coupons.findIndex(item => item.id === coupon.id);
+      console.log(index);
+      if (index === -1) {
+        return state.coupons.push(coupon);
+      }
 
-      // state.coupons[index] = { ...coupon };
+      console.log(coupon);
+      state.coupons.splice(index, 1, coupon);
     }
   },
   actions: {

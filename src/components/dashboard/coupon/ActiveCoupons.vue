@@ -1,9 +1,9 @@
 <template>
   <v-data-iterator
     id="active-coupons"
-    :items="coupons"
+    :items="activeCoupons"
     :items-per-page.sync="itemsPerPage"
-    v-if="coupons && coupons.length"
+    v-if="activeCoupons && activeCoupons.length"
   >
     <template v-slot:default="props">
       <v-row>
@@ -38,8 +38,6 @@
                   {{ item[listItem.value] }}
                 </v-list-item-action>
               </v-list-item>
-
-              <!-- LIST ITEMS CONTAINING DATES -->
             </v-list>
           </v-card>
         </v-col>
@@ -49,9 +47,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'coupons',
-  props: ['coupons'],
   data() {
     return {
       itemsPerPage: 4,
@@ -62,6 +61,12 @@ export default {
         { text: 'Created At', value: 'createdAt', date: true }
       ]
     };
+  },
+  computed: {
+    ...mapGetters('dashboard', ['activeCoupons'])
+  },
+  methods: {
+    ...mapActions('dashboard', ['editCoupon'])
   }
 };
 </script>

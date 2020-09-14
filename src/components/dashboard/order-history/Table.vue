@@ -3,7 +3,7 @@
     id="table"
     :headers="headers"
     :items="orders"
-    :loading="!orders || !orders.length"
+    :loading="!orders"
     loading-text="Loading... Please wait"
     @click:row="
       val => $router.push({ name: 'order-detail', params: { id: val.id } })
@@ -36,7 +36,8 @@ export default {
         { text: 'Total', value: 'total' },
         { text: 'Date', value: 'createdAt' }
       ],
-      orders: []
+      orders: [],
+      stopLoading: false
     };
   },
   created() {

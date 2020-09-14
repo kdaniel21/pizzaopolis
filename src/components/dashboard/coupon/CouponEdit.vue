@@ -15,7 +15,7 @@
           <v-row class="px-3 px-sm-0">
             <v-col cols="12" sm="6">
               <v-text-field
-                v-model="editedItem.value"
+                v-model.number="editedItem.value"
                 min="0"
                 label="Discount"
                 type="number"
@@ -29,14 +29,18 @@
 
           <v-row class="px-3 px-sm-0">
             <v-col cols="12" sm="6">
-              <v-text-field
+              <!-- <v-text-field
                 v-model="editedItem.expiresAt"
                 label="Expiration"
-              ></v-text-field>
+              ></v-text-field> -->
+              <v-date-picker
+                v-model="editedItem.expiresAt"
+                label="Expiration"
+              ></v-date-picker>
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
-                v-model="editedItem.maxTimesUsed"
+                v-model.number="editedItem.maxTimesUsed"
                 min="0"
                 label="Max Usage"
                 type="number"
@@ -101,6 +105,7 @@ export default {
       this.dialog = false;
     },
     saveCoupon() {
+      console.log(this.editedItem);
       axios
         .patch(`/coupons/${this.editedItem.id}`, this.editedItem)
         .then(() => {
