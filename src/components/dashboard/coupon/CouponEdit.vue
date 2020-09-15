@@ -29,14 +29,10 @@
 
           <v-row class="px-3 px-sm-0">
             <v-col cols="12" sm="6">
-              <!-- <v-text-field
+              <v-datetime-picker
+                label="Expiration Time"
                 v-model="editedItem.expiresAt"
-                label="Expiration"
-              ></v-text-field> -->
-              <v-date-picker
-                v-model="editedItem.expiresAt"
-                label="Expiration"
-              ></v-date-picker>
+              ></v-datetime-picker>
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
@@ -86,7 +82,7 @@ export default {
   watch: {
     editedCoupon(val) {
       if (val && Object.keys(val).length) {
-        this.editedItem = { ...val };
+        this.editedItem = { ...val, expiresAt: new Date(val.expiresAt) };
         this.dialog = true;
       }
     }
