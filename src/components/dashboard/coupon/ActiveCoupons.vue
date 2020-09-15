@@ -67,6 +67,11 @@ export default {
   computed: {
     ...mapGetters('dashboard', ['activeCoupons'])
   },
+  watch: {
+    activeCoupons(val) {
+      console.log('rendering', val);
+    }
+  },
   methods: {
     ...mapActions('dashboard', ['editCoupon'])
   }

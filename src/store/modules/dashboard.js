@@ -12,7 +12,6 @@ export default {
   getters: {
     isLoggedIn: state => !!state.user && !!Object.keys(state.user).length,
     activeCoupons: state => {
-      console.log('triggered');
       if (!state.coupons || !state.coupons.length) return [];
 
       return state.coupons.filter(

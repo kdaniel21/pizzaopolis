@@ -77,6 +77,13 @@ export default {
     ...mapState('dashboard', ['editedCoupon']),
     formTitle() {
       return this.editedItem ? 'Edit Coupon' : 'Create Coupon';
+    },
+    couponValid() {
+      return (
+        this.editedItem.active &&
+        new Date(this.editedItem.expiresAt).getTime() > Date.now() &&
+        this.editedItem.maxTimesUsed > this.editedItem.timesUsed
+      );
     }
   },
   watch: {
@@ -92,7 +99,7 @@ export default {
     ...mapActions('dashboard', ['updateCoupon']),
     onSave() {
       // Make changes in the store locally
-      this.updateCoupon(this.editedItem);
+      this.updateCoupon({ ...this.editedItem, valid: this.couponValid });
 
       // Make changes on the server via the API
       this.editedItem.id ? this.saveCoupon() : this.createCoupon();
