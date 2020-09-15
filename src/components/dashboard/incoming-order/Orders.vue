@@ -4,6 +4,7 @@
     :items="incomingOrders"
     :items-per-page="itemsPerPage"
     hide-default-footer
+    no-data-text="There are no incoming orders"
   >
     <!-- CONTENT -->
     <template v-slot:default>
