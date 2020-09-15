@@ -98,28 +98,31 @@ export default {
     ...mapMutations(['showSnackbar']),
     ...mapActions('dashboard', ['updateCoupon']),
     onSave() {
-      // Make changes in the store locally
-      this.updateCoupon({ ...this.editedItem, valid: this.couponValid });
+      // Select the correct request
+      const request = this.editedItem.id
+        ? this.saveCoupon()
+        : this.createCoupon();
 
       // Make changes on the server via the API
-      this.editedItem.id ? this.saveCoupon() : this.createCoupon();
+      request
+        .then(res => {
+          this.showSnackbar({ text: 'Coupon updated successfully!' });
+          // Update the state via store
+          this.updateCoupon(res.data.data);
+          this.closeDialog();
+        })
+        .catch(() =>
+          this.showSnackbar({ text: 'Coupon could not be updated!' })
+        );
     },
     closeDialog() {
       this.dialog = false;
     },
     saveCoupon() {
-      axios
-        .patch(`/coupons/${this.editedItem.id}`, this.editedItem)
-        .then(() => {
-          this.showSnackbar({ text: 'Coupon updated successfully!' });
-          this.closeDialog();
-        });
+      return axios.patch(`/coupons/${this.editedItem.id}`, this.editedItem);
     },
     createCoupon() {
-      axios.post('/coupons', this.editedItem).then(() => {
-        this.showSnackbar({ text: 'Coupon created successfully!' });
-        this.closeDialog();
-      });
+      return axios.post('/coupons', this.editedItem);
     }
   }
 };
