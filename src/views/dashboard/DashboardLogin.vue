@@ -21,7 +21,7 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'DashboardLogin',
@@ -35,10 +35,12 @@ export default {
   },
   methods: {
     ...mapActions('dashboard', ['getUser']),
+    ...mapMutations(['showSnackbar']),
     login() {
       axios
         .get('/csrf-cookie')
         .then(() => axios.post('/login', this.formData))
+        .catch(() => this.showSnackbar('Invalid Credentials!'))
         .then(() => this.getUser())
         .then(() => this.$router.push({ name: 'incoming' }));
     }
