@@ -32,7 +32,9 @@
               <v-list-item v-for="listItem in listItems" :key="listItem.value">
                 <v-list-item-content>{{ listItem.text }}</v-list-item-content>
                 <v-list-item-action v-if="listItem.date">
-                  {{ new Date(item[listItem.value]).toLocaleString('hu-HU') }}
+                  {{
+                    new Date(item[listItem.value]).toLocaleDateString('hu-HU')
+                  }}
                 </v-list-item-action>
                 <v-list-item-action v-else>
                   {{ item[listItem.value] }}
@@ -53,7 +55,7 @@ export default {
   name: 'coupons',
   data() {
     return {
-      itemsPerPage: 4,
+      itemsPerPage: 3,
       listItems: [
         { text: 'Max Usage', value: 'maxTimesUsed' },
         { text: 'Total Usage', value: 'timesUsed' },
