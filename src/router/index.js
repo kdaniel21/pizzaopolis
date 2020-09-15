@@ -95,7 +95,6 @@ router.beforeEach((to, from, next) => {
     to.matched.some(record => record.meta.requiresAuth) &&
     !store.getters['dashboard/isLoggedIn']
   ) {
-    console.log('auth');
     return next({ name: 'auth' });
   }
 
@@ -104,7 +103,6 @@ router.beforeEach((to, from, next) => {
     to.matched.some(record => record.meta.noAuthOnly) &&
     store.getters['dashboard/isLoggedIn']
   ) {
-    console.log('no auth');
     return next({ name: 'incoming' });
   }
 

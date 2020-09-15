@@ -12,6 +12,7 @@ export default {
   getters: {
     isLoggedIn: state => !!state.user && !!Object.keys(state.user).length,
     activeCoupons: state => {
+      console.log('triggered');
       if (!state.coupons || !state.coupons.length) return [];
 
       return state.coupons.filter(
@@ -72,14 +73,11 @@ export default {
         return (state.coupons = [...coupon]);
       }
 
-      // state.coupons = [...state.coupons, coupon];
       const index = state.coupons.findIndex(item => item.id === coupon.id);
-      console.log(index);
       if (index === -1) {
         return state.coupons.push(coupon);
       }
 
-      console.log(coupon);
       state.coupons.splice(index, 1, coupon);
     }
   },
@@ -89,7 +87,7 @@ export default {
         const res = await axios.get('/user');
         commit('setUser', res.data.data);
         // eslint-disable-next-line no-empty
-      } catch (err) {}
+      } catch (err) { }
     },
     logout: ({ commit }) => {
       axios.post('/logout', {}).then(() => {

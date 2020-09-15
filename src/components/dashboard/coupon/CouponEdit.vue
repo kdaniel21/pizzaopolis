@@ -101,7 +101,6 @@ export default {
       this.dialog = false;
     },
     saveCoupon() {
-      console.log(this.editedItem);
       axios
         .patch(`/coupons/${this.editedItem.id}`, this.editedItem)
         .then(() => {
