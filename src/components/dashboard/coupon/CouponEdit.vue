@@ -77,13 +77,6 @@ export default {
     ...mapState('dashboard', ['editedCoupon']),
     formTitle() {
       return this.editedItem ? 'Edit Coupon' : 'Create Coupon';
-    },
-    couponValid() {
-      return (
-        this.editedItem.active &&
-        new Date(this.editedItem.expiresAt).getTime() > Date.now() &&
-        this.editedItem.maxTimesUsed > this.editedItem.timesUsed
-      );
     }
   },
   watch: {
