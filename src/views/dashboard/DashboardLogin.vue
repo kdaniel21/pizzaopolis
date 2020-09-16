@@ -40,7 +40,7 @@ export default {
       axios
         .get('/csrf-cookie')
         .then(() => axios.post('/login', this.formData))
-        .catch(() => this.showSnackbar('Invalid Credentials!'))
+        .catch(() => this.showSnackbar({ text: 'Invalid Credentials!' }))
         .then(() => this.getUser())
         .then(() => this.$router.push({ name: 'incoming' }));
     }

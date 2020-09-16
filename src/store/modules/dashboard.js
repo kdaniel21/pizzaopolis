@@ -86,7 +86,7 @@ export default {
         const res = await axios.get('/user');
         commit('setUser', res.data.data);
         // eslint-disable-next-line no-empty
-      } catch (err) { }
+      } catch (err) {}
     },
     logout: ({ commit }) => {
       axios.post('/logout', {}).then(() => {
