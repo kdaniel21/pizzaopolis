@@ -1,6 +1,6 @@
 import axios from 'axios';
 import camelCaseKeys from 'camelcase-keys';
-// import snakeCaseKeys from 'snakecase-keys';
+import snakeCaseKeys from 'snakecase-keys';
 
 export default function setup() {
   axios.interceptors.request.use(config => {
@@ -22,12 +22,12 @@ export default function setup() {
     }
   ];
 
-  // axios.defaults.transformRequest = [
-  //   data => {
-  //     if (data) {
-  //       console.log(JSON.stringify(snakeCaseKeys(data, { deep: true })));
-  //       return snakeCaseKeys(data, { deep: true });
-  //     }
-  //   }
-  // ];
+  axios.defaults.transformRequest = [
+    (data, headers) => {
+      headers['content-type'] = 'application/json';
+      if (data && headers['content-type'].includes('application/json')) {
+        return JSON.stringify(snakeCaseKeys(data, { deep: true }));
+      }
+    }
+  ];
 }
