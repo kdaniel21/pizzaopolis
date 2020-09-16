@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router/index';
 
 export default {
   namespaced: true,
@@ -91,7 +92,7 @@ export default {
     logout: ({ commit }) => {
       axios.post('/logout', {}).then(() => {
         commit('setUser', null);
-        this.$router.push('/login');
+        router.push({ name: 'auth' });
       });
     },
     getIncomingOrders: ({ commit }) => {
