@@ -97,7 +97,7 @@ export default {
       // Sends only the updated property not the whole object
       axios
         .patch(`/foods/${item.id}`, { [property]: item[property] })
-        .then(() => this.showSnackbar({ text: 'Successfully updated!' }))
+        .then(() => {})
         .catch(err => {
           console.log(err);
           this.showSnackbar({ text: 'Could not be updated!' });
