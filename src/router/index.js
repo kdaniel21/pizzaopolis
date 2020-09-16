@@ -11,6 +11,7 @@ import Orders from '../components/dashboard/incoming-order/Orders';
 import DetailOverview from '@/components/dashboard/incoming-order/details/DetailOverview';
 import Table from '@/components/dashboard/order-history/Table';
 import Layout from '@/components/dashboard/coupon/Layout';
+import FoodsTable from '@/components/dashboard/foods/FoodsTable';
 
 Vue.use(VueRouter);
 
@@ -66,6 +67,12 @@ const routes = [
         path: 'coupons',
         name: 'coupons',
         component: Layout,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: FoodsTable,
         meta: { requiresAuth: true }
       }
     ]
