@@ -37,7 +37,14 @@
         v-model="item.category"
         :options="['option1', 'option2']"
         default-text="No category"
-      />
+      >
+        <template #append-item>
+          <create-select-item
+            @new-item="categories.push($event)"
+            endpoint="/categories"
+          />
+        </template>
+      </select-edit-dialog>
     </template>
 
     <template #item.ingredients="{ item }">
@@ -50,7 +57,10 @@
       >
         <!-- CREATE INGREDIENT TEXT FIELD -->
         <template #append-item>
-          <create-ingredient @newIngredient="val => ingredients.push(val)" />
+          <create-select-item
+            @new-item="ingredients.push($event)"
+            endpoint="/ingredients"
+          />
         </template>
 
         <!-- CUSTOM LIST APPEARANCE -->
@@ -67,7 +77,7 @@ import axios from 'axios';
 import { mapMutations } from 'vuex';
 import TextEditDialog from './TextEditDialog';
 import SelectEditDialog from './SelectEditDialog';
-import CreateIngredient from './CreateIngredient';
+import CreateSelectItem from './CreateSelectItem';
 import IngredientItem from './IngredientItem';
 
 export default {
@@ -75,7 +85,7 @@ export default {
   components: {
     TextEditDialog,
     SelectEditDialog,
-    CreateIngredient,
+    CreateSelectItem,
     IngredientItem
   },
   data() {
@@ -88,7 +98,8 @@ export default {
         { text: 'Category', value: 'category' },
         { text: 'Ingredients', value: 'ingredients' }
       ],
-      ingredients: []
+      ingredients: [],
+      categories: []
     };
   },
   methods: {
