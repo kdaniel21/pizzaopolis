@@ -92,7 +92,7 @@ router.beforeEach((to, from, next) => {
 
   firstAttempt = false;
 
-  store.dispatch('dashboard/getUser').then(() => next());
+  store.dispatch('dashboard/auth/getUser').then(() => next());
 });
 
 // Auth guard
@@ -100,7 +100,7 @@ router.beforeEach((to, from, next) => {
   // Only auth
   if (
     to.matched.some(record => record.meta.requiresAuth) &&
-    !store.getters['dashboard/isLoggedIn']
+    !store.getters['dashboard/auth/isLoggedIn']
   ) {
     return next({ name: 'auth' });
   }
@@ -108,9 +108,8 @@ router.beforeEach((to, from, next) => {
   // Only no auth
   if (
     to.matched.some(record => record.meta.noAuthOnly) &&
-    store.getters['dashboard/isLoggedIn']
+    store.getters['dashboard/auth/isLoggedIn']
   ) {
-    console.log('no auth');
     return next({ name: 'incoming' });
   }
 

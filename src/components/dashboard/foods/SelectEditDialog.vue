@@ -2,7 +2,7 @@
   <v-edit-dialog
     id="select-edit-dialog"
     :return-value="val => $emit('input', val)"
-    @close="$emit('save')"
+    @close="updateFood({ updatedProperty: property, item })"
   >
     <!-- DISPLAY CHIPS -->
     <v-chip-group v-if="value">
@@ -26,19 +26,12 @@
       >
         <!-- POTENTIAL SLOT FOR SPECIFIC USE CASES -->
         <template #append-item>
-          <create-select-item
-            :endpoint="endpoint"
-            @new-item="$emit('new-item', $event)"
-          />
+          <create-select-item :property="property" />
         </template>
 
         <!-- APPEARANCE OF THE ITEM -->
         <template #item="data">
-          <select-item
-            :data="data"
-            :endpoint="endpoint"
-            @delete="$emit('delete', $event)"
-          />
+          <select-item :data="data" :property="property" />
         </template>
       </v-select>
     </template>
@@ -46,12 +39,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import SelectItem from './SelectItem';
 import CreateSelectItem from './CreateSelectItem';
 
 export default {
   name: 'SelectEditDialog',
-  props: ['value', 'options', 'multiple', 'defaultText', 'endpoint'],
+  props: ['value', 'options', 'multiple', 'defaultText', 'property', 'item'],
   components: {
     SelectItem,
     CreateSelectItem
@@ -64,9 +58,7 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log('hello world');
-    }
+    ...mapActions('dashboard/foods', ['updateFood'])
   }
 };
 </script>

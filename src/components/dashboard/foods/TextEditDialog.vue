@@ -2,7 +2,7 @@
   <v-edit-dialog
     id="text-edit-dialog"
     :return-value="val => $emit('input', val)"
-    @close="$emit('save')"
+    @close="updateFood({ updatedProperty: property, item })"
   >
     <!-- SHOWING THE DEFAULT VALUE IF NOTHING WAS PROVIDED -->
     <!-- SHOWING NUMBERS WITH 2 DECIMALS -->
@@ -22,8 +22,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'TextEditDialog',
-  props: ['value', 'number', 'defaultText']
+  props: ['value', 'number', 'defaultText', 'property', 'item'],
+  methods: {
+    ...mapActions('dashboard/foods', ['updateFood'])
+  }
 };
 </script>

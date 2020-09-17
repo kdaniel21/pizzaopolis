@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('dashboard', ['getUser']),
+    ...mapActions('dashboard/auth', ['getUser']),
     ...mapMutations(['showSnackbar']),
     login() {
       axios

@@ -8,36 +8,22 @@
     </v-list-item-action>
     <v-list-item-content>{{ data.item.name }}</v-list-item-content>
     <v-list-item-action>
-      <v-btn icon @click="deleteItem"><v-icon>delete</v-icon></v-btn>
+      <v-btn icon @click="deleteItem({ property, id: data.item.id })"
+        ><v-icon>delete</v-icon></v-btn
+      >
     </v-list-item-action>
   </v-list-item>
 </template>
 
 <script>
-import axios from 'axios';
-import { mapMutations } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'SelectItem',
-  props: ['data', 'endpoint'],
+  props: ['data', 'property'],
   methods: {
     ...mapMutations(['showSnackbar']),
-    deleteItem() {
-      const { id } = this.data.item;
-
-      axios
-        .delete(`${this.endpoint}/${id}`)
-        .then(() => {
-          this.showSnackbar({ text: 'Removed!' });
-          this.$emit('delete', id);
-        })
-        .catch(() => {
-          this.showSnackbar({ text: 'Could not delete ingredient!' });
-        });
-    }
-  },
-  created() {
-    console.log(this.data);
+    ...mapActions('dashboard/foods', ['deleteItem'])
   }
 };
 </script>

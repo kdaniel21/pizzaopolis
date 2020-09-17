@@ -10,7 +10,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-// import axios from 'axios';
 import ActiveCoupons from './ActiveCoupons';
 import CouponsTable from './CouponsTable';
 

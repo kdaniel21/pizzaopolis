@@ -4,33 +4,31 @@
       <v-text-field label="Create New" v-model="name"></v-text-field>
     </v-list-item-content>
     <v-list-item-action>
-      <v-btn text @click="createItem">Create</v-btn>
+      <v-btn
+        text
+        @click="addItem({ property: property, item: { name } }) && emptyForm()"
+        >Create</v-btn
+      >
     </v-list-item-action>
   </v-list-item>
 </template>
 
 <script>
-import axios from 'axios';
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'CreateSelectItem',
-  props: ['endpoint'],
+  props: ['property'],
   data() {
     return {
       name: null
     };
   },
   methods: {
-    ...mapMutations(['showSnackbar']),
-    createItem() {
-      axios
-        .post(this.endpoint, { name: this.name })
-        .then(res => {
-          this.$emit('new-item', res.data.data);
-          this.name = null;
-        })
-        .catch(() => this.showSnackbar({ text: 'Could not create!' }));
+    ...mapActions('dashboard/foods', ['addItem']),
+    emptyForm() {
+      console.log('ran');
+      this.name = null;
     }
   }
 };
