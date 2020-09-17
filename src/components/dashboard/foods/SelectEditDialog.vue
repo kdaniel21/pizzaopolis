@@ -23,16 +23,23 @@
         return-object
         label="Select"
         chips
-        :multiple="multiple ? true : false"
+        :multiple="true"
       >
         <!-- POTENTIAL SLOT FOR SPECIFIC USE CASES -->
         <template #append-item>
-          <slot name="append-item"></slot>
+          <create-select-item
+            :endpoint="endpoint"
+            @new-item="$emit('new-item', $event)"
+          />
         </template>
 
         <!-- APPEARANCE OF THE ITEM -->
         <template #item="data">
-          <slot name="item" :data="data"></slot>
+          <select-item
+            :data="data"
+            :endpoint="endpoint"
+            @delete="$emit('delete', $event)"
+          />
         </template>
       </v-select>
     </template>
@@ -40,9 +47,16 @@
 </template>
 
 <script>
+import SelectItem from './SelectItem';
+import CreateSelectItem from './CreateSelectItem';
+
 export default {
   name: 'SelectEditDialog',
-  props: ['value', 'options', 'multiple', 'defaultText'],
+  props: ['value', 'options', 'multiple', 'defaultText', 'endpoint'],
+  components: {
+    SelectItem,
+    CreateSelectItem
+  },
   computed: {
     displayedChips() {
       if (Array.isArray(this.value)) return this.value;

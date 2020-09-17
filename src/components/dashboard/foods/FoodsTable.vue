@@ -33,18 +33,16 @@
     </template>
 
     <template #item.category="{ item }">
+      <!-- TODO: REACT TO NEW ITEM EVENT -->
       <select-edit-dialog
-        v-model="item.category"
-        :options="['option1', 'option2']"
+        v-model="item.categories"
+        :options="categories"
         default-text="No category"
-      >
-        <template #append-item>
-          <create-select-item
-            @new-item="categories.push($event)"
-            endpoint="/categories"
-          />
-        </template>
-      </select-edit-dialog>
+        endpoint="/categories"
+        @save="updateItem(item, 'categories')"
+        @new-item="categories.push($event)"
+        @delete="deleteItem($event, 'categories')"
+      />
     </template>
 
     <template #item.ingredients="{ item }">
@@ -52,22 +50,12 @@
         v-model="item.ingredients"
         :options="ingredients"
         default-text="No Ingredients"
+        endpoint="/ingredients"
         :multiple="true"
         @save="updateItem(item, 'ingredients')"
-      >
-        <!-- CREATE INGREDIENT TEXT FIELD -->
-        <template #append-item>
-          <create-select-item
-            @new-item="ingredients.push($event)"
-            endpoint="/ingredients"
-          />
-        </template>
-
-        <!-- CUSTOM LIST APPEARANCE -->
-        <template #item="data">
-          <ingredient-item :data="data.data" @delete="deleteIngredient" />
-        </template>
-      </select-edit-dialog>
+        @new-item="ingredients.push($event)"
+        @delete="deleteItem($event, 'ingredients')"
+      />
     </template>
   </v-data-table>
 </template>
@@ -77,16 +65,12 @@ import axios from 'axios';
 import { mapMutations } from 'vuex';
 import TextEditDialog from './TextEditDialog';
 import SelectEditDialog from './SelectEditDialog';
-import CreateSelectItem from './CreateSelectItem';
-import IngredientItem from './IngredientItem';
 
 export default {
   name: 'FoodsTable',
   components: {
     TextEditDialog,
-    SelectEditDialog,
-    CreateSelectItem,
-    IngredientItem
+    SelectEditDialog
   },
   data() {
     return {
@@ -114,13 +98,11 @@ export default {
           this.showSnackbar({ text: 'Could not be updated!' });
         });
     },
-    deleteIngredient(id) {
-      const index = this.ingredients.findIndex(
-        ingredient => ingredient.id === id
-      );
+    deleteItem(id, property) {
+      const index = this[property].findIndex(item => item.id === id);
 
       if (index !== -1) {
-        this.ingredients.splice(index, 1);
+        this[property].splice(index, 1);
       }
     }
   },
@@ -133,6 +115,11 @@ export default {
     // FETCH INGREDIENTS
     axios.get('/ingredients').then(res => {
       this.ingredients = res.data.data;
+    });
+
+    // FETCH CATEGORIES
+    axios.get('/categories').then(res => {
+      this.categories = res.data.data;
     });
   }
 };

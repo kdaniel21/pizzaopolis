@@ -1,5 +1,5 @@
 <template>
-  <v-list-item v-bind="data.attrs" v-on="data.on">
+  <v-list-item v-bind="data.attrs" v-on="data.on" id="select-item">
     <v-list-item-action>
       <v-checkbox
         :input-value="data.attrs.inputValue"
@@ -8,7 +8,7 @@
     </v-list-item-action>
     <v-list-item-content>{{ data.item.name }}</v-list-item-content>
     <v-list-item-action>
-      <v-btn icon @click="deleteIngredient"><v-icon>delete</v-icon></v-btn>
+      <v-btn icon @click="deleteItem"><v-icon>delete</v-icon></v-btn>
     </v-list-item-action>
   </v-list-item>
 </template>
@@ -18,23 +18,26 @@ import axios from 'axios';
 import { mapMutations } from 'vuex';
 
 export default {
-  name: 'IngredientItem',
-  props: ['data'],
+  name: 'SelectItem',
+  props: ['data', 'endpoint'],
   methods: {
     ...mapMutations(['showSnackbar']),
-    deleteIngredient() {
+    deleteItem() {
       const { id } = this.data.item;
 
       axios
-        .delete(`/ingredients/${id}`)
+        .delete(`${this.endpoint}/${id}`)
         .then(() => {
-          this.showSnackbar({ text: 'Ingredient removed!' });
+          this.showSnackbar({ text: 'Removed!' });
           this.$emit('delete', id);
         })
         .catch(() => {
           this.showSnackbar({ text: 'Could not delete ingredient!' });
         });
     }
+  },
+  created() {
+    console.log(this.data);
   }
 };
 </script>
