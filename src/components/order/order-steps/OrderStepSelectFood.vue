@@ -50,7 +50,10 @@ export default {
     stringifyToppings(toppings) {
       if (!toppings.length) return '';
 
-      const stringifiedToppings = toppings.toString().replace(/,/g, ', ');
+      const stringifiedToppings = toppings
+        .map(topping => topping.name)
+        .toString()
+        .replace(/,/g, ', ');
       return '(' + stringifiedToppings + ')';
     },
     addItem(order) {
