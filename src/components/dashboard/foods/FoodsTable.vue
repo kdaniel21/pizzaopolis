@@ -7,6 +7,14 @@
     class="elevation-1"
     v-if="foods.length"
   >
+    <!-- CREATE BUTTON -->
+    <template #top>
+      <v-toolbar flat color="white">
+        <v-spacer></v-spacer>
+        <create-food-dialog />
+      </v-toolbar>
+    </template>
+
     <template #item.name="{ item }">
       <text-edit-dialog
         v-model="item.name"
@@ -63,12 +71,14 @@
 <script>
 import axios from 'axios';
 import { mapMutations } from 'vuex';
+import CreateFoodDialog from './CreateFoodDialog';
 import TextEditDialog from './TextEditDialog';
 import SelectEditDialog from './SelectEditDialog';
 
 export default {
   name: 'FoodsTable',
   components: {
+    CreateFoodDialog,
     TextEditDialog,
     SelectEditDialog
   },

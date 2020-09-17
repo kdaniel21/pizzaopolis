@@ -49,7 +49,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('dashboard', ['incomingOrders']),
+    ...mapState('dashboard/incomingOrders', ['incomingOrders']),
     numberOfPages() {
       return Math.ceil(this.incomingOrders.length / this.itemsPerPage);
     },
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('dashboard', ['getIncomingOrders']),
+    ...mapActions('dashboard/incomingOrders', ['getIncomingOrders']),
     calcRowsPerPage() {
       let container = document.querySelector('#container');
       let minItemHeight = 170;

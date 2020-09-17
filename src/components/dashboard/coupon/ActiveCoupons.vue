@@ -65,7 +65,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('dashboard', ['activeCoupons'])
+    ...mapGetters('dashboard/coupons', ['activeCoupons'])
   },
   watch: {
     activeCoupons(val) {
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('dashboard', ['editCoupon'])
+    ...mapActions('dashboard/coupons', ['editCoupon'])
   }
 };
 </script>

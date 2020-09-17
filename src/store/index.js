@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import order from './modules/order';
-import dashboard from './modules/dashboard';
+import dashboard from '@/store/modules/dashboard';
 
 Vue.use(Vuex);
 
@@ -36,7 +36,6 @@ export default new Vuex.Store({
       state.snackbar.timeout = 4000;
     }
   },
-  actions: {},
   modules: {
     order,
     dashboard

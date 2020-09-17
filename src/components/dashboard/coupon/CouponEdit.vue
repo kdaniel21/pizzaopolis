@@ -74,7 +74,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('dashboard', ['editedCoupon']),
+    ...mapState('dashboard/coupons', ['editedCoupon']),
     formTitle() {
       return this.editedItem ? 'Edit Coupon' : 'Create Coupon';
     }
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     ...mapMutations(['showSnackbar']),
-    ...mapActions('dashboard', ['updateCoupon']),
+    ...mapActions('dashboard/coupons', ['updateCoupon']),
     onSave() {
       // Select the correct request
       const request = this.editedItem.id

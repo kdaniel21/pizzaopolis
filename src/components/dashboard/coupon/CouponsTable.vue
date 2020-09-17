@@ -49,10 +49,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('dashboard', ['oldAndOneTimeCoupons'])
+    ...mapGetters('dashboard/coupons', ['oldAndOneTimeCoupons'])
   },
   methods: {
-    ...mapActions('dashboard', ['editCoupon'])
+    ...mapActions('dashboard/coupons', ['editCoupon'])
   }
 };
 </script>

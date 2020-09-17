@@ -18,7 +18,7 @@ export default {
   name: 'Layout',
   components: { ActiveCoupons, CouponsTable },
   methods: {
-    ...mapActions('dashboard', ['getCoupons'])
+    ...mapActions('dashboard/coupons', ['getCoupons'])
   },
   created() {
     this.getCoupons();

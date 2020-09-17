@@ -57,7 +57,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('dashboard', ['user']),
+    ...mapState('dashboard/auth', ['user']),
     sidebarOpen: {
       get() {
         return this.isOpen;
@@ -68,7 +68,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('dashboard', ['logout'])
+    ...mapActions('dashboard/auth', ['logout'])
   }
 };
 </script>

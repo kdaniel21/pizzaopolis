@@ -42,7 +42,7 @@ export default {
   components: { DeliverButton },
   props: ['order'],
   methods: {
-    ...mapActions('dashboard', ['toggleFoodReady']),
+    ...mapActions('dashboard/incomingOrders', ['toggleFoodReady']),
     viewOrder() {
       this.$router.push({
         name: 'order-detail',
