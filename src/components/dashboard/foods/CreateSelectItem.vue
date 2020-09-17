@@ -1,10 +1,7 @@
 <template>
-  <v-list-item id="create-ingredient">
+  <v-list-item id="create-select-item">
     <v-list-item-content>
-      <v-text-field
-        label="Add Ingredient"
-        v-model="ingredientName"
-      ></v-text-field>
+      <v-text-field label="Create New" v-model="name"></v-text-field>
     </v-list-item-content>
     <v-list-item-action>
       <v-btn text @click="createItem">Create</v-btn>
@@ -17,24 +14,23 @@ import axios from 'axios';
 import { mapMutations } from 'vuex';
 
 export default {
-  name: 'CreateIngredient',
+  name: 'CreateSelectItem',
+  props: ['endpoint'],
   data() {
     return {
-      ingredientName: null
+      name: null
     };
   },
   methods: {
     ...mapMutations(['showSnackbar']),
     createItem() {
       axios
-        .post('/ingredients', { name: this.ingredientName })
+        .post(this.endpoint, { name: this.name })
         .then(res => {
-          this.$emit('newIngredient', res.data.data);
-          this.ingredientName = null;
+          this.$emit('new-item', res.data.data);
+          this.name = null;
         })
-        .catch(() =>
-          this.showSnackbar({ text: 'Could not create ingredient!' })
-        );
+        .catch(() => this.showSnackbar({ text: 'Could not create!' }));
     }
   }
 };
