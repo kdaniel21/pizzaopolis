@@ -2,7 +2,6 @@
   <v-edit-dialog
     id="select-edit-dialog"
     :return-value="val => $emit('input', val)"
-    @save="$emit('save')"
     @close="$emit('save')"
   >
     <!-- DISPLAY CHIPS -->

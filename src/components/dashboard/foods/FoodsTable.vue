@@ -11,7 +11,7 @@
       <text-edit-dialog
         v-model="item.name"
         default-text="Unknown"
-        @save="updateItem(item, 'name')"
+        @close="updateItem(item, 'name')"
       />
     </template>
 
@@ -19,7 +19,7 @@
       <text-edit-dialog
         v-model.number="item.price"
         :number="true"
-        @save="updateItem(item, 'price')"
+        @close="updateItem(item, 'price')"
       />
     </template>
 
@@ -28,7 +28,7 @@
         v-model.number="item.discountedPrice"
         :number="true"
         default-text="No discount price"
-        @save="updateItem(item, 'discountedPrice')"
+        @close="updateItem(item, 'discountedPrice')"
       />
     </template>
 
@@ -39,7 +39,7 @@
         :options="categories"
         default-text="No category"
         endpoint="/categories"
-        @save="updateItem(item, 'categories')"
+        @close="updateItem(item, 'categories')"
         @new-item="categories.push($event)"
         @delete="deleteItem($event, 'categories')"
       />
@@ -52,7 +52,7 @@
         default-text="No Ingredients"
         endpoint="/ingredients"
         :multiple="true"
-        @save="updateItem(item, 'ingredients')"
+        @close="updateItem(item, 'ingredients')"
         @new-item="ingredients.push($event)"
         @delete="deleteItem($event, 'ingredients')"
       />

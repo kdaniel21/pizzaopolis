@@ -2,7 +2,6 @@
   <v-edit-dialog
     id="text-edit-dialog"
     :return-value="val => $emit('input', val)"
-    @save="$emit('save')"
     @close="$emit('save')"
   >
     <!-- SHOWING THE DEFAULT VALUE IF NOTHING WAS PROVIDED -->
