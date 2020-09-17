@@ -39,38 +39,6 @@ export default {
   data() {
     return {
       menu: []
-      // menu: [
-      //   {
-      //     id: 'a9a6ad46-9ae0-4875-a7e8-377de54fd102',
-      //     name: 'Pizza One',
-      //     price: 11.9,
-      //     toppings: ['tomato sauce', 'cheese', 'tuna', 'onions']
-      //   },
-      //   {
-      //     id: 2,
-      //     name: 'Pizza One',
-      //     price: 11.9,
-      //     toppings: ['tomato sauce', 'cheese', 'tuna', 'onions']
-      //   },
-      //   {
-      //     id: 3,
-      //     name: 'Pizza One',
-      //     price: 11.9,
-      //     toppings: ['tomato sauce', 'cheese', 'tuna', 'onions']
-      //   },
-      //   {
-      //     id: 4,
-      //     name: 'Pizza One',
-      //     price: 11.9,
-      //     toppings: ['tomato sauce', 'cheese', 'tuna', 'onions']
-      //   },
-      //   {
-      //     id: 5,
-      //     name: 'Pizza One',
-      //     price: 11.9,
-      //     toppings: ['tomato sauce', 'cheese', 'tuna', 'onions']
-      //   }
-      // ]
     };
   },
   computed: {
