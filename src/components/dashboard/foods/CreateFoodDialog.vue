@@ -30,34 +30,6 @@
           </v-col>
         </v-row>
 
-        <v-select
-          :value="value"
-          @input="val => $emit('input', val)"
-          :items="options"
-          item-text="name"
-          return-object
-          label="Select"
-          chips
-          :multiple="true"
-        >
-          <!-- POTENTIAL SLOT FOR SPECIFIC USE CASES -->
-          <template #append-item>
-            <create-select-item
-              :endpoint="endpoint"
-              @new-item="$emit('new-item', $event)"
-            />
-          </template>
-
-          <!-- APPEARANCE OF THE ITEM -->
-          <template #item="data">
-            <select-item
-              :data="data"
-              :endpoint="endpoint"
-              @delete="$emit('delete', $event)"
-            />
-          </template>
-        </v-select>
-
         <v-switch v-model="formData.active" label="Active"></v-switch>
       </v-card-text>
 
@@ -75,6 +47,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+
 export default {
   name: 'CreateFoodDialog',
   data() {
