@@ -13,7 +13,7 @@ export default {
     // Calculate the amount to be paid
     total: state => {
       const total = state.orders.reduce(
-        (prev, curr) => +prev + +curr.price * +curr.quantity,
+        (prev, curr) => +prev + +curr.currentPrice * +curr.quantity,
         0
       );
 
