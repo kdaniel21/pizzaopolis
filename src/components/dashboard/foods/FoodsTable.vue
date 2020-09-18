@@ -8,12 +8,12 @@
     v-if="foods.length"
   >
     <!-- CREATE BUTTON -->
-    <!-- <template #top>
+    <template #top>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
         <create-food-dialog />
       </v-toolbar>
-    </template> -->
+    </template>
 
     <template #item.name="{ item }">
       <text-edit-dialog
@@ -68,14 +68,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-// import CreateFoodDialog from './CreateFoodDialog';
+import CreateFoodDialog from './CreateFoodDialog';
 import TextEditDialog from './TextEditDialog';
 import SelectEditDialog from './SelectEditDialog';
 
 export default {
   name: 'FoodsTable',
   components: {
-    // CreateFoodDialog,
+    CreateFoodDialog,
     TextEditDialog,
     SelectEditDialog
   },

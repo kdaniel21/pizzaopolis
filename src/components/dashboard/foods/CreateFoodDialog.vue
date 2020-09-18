@@ -14,7 +14,7 @@
         <v-row class="px-3 px-sm-0">
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="formData.price"
+              v-model.number="formData.price"
               label="Price"
               type="number"
               step="0.1"
@@ -22,7 +22,7 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="formData.discountedPrice"
+              v-model.number="formData.discountedPrice"
               label="Discounted Price"
               type="number"
               step="0.1"
@@ -60,11 +60,21 @@
 
         <v-switch v-model="formData.active" label="Active"></v-switch>
       </v-card-text>
+
+      <v-card-actions>
+        <v-btn @click="closeForm">Cancel</v-btn>
+        <v-btn
+          @click="addItem({ property: 'foods', item: formData }) && closeForm()"
+          color="primary"
+          >Save</v-btn
+        >
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'CreateFoodDialog',
   data() {
@@ -72,6 +82,13 @@ export default {
       dialog: null,
       formData: {}
     };
+  },
+  methods: {
+    ...mapActions('dashboard/foods', ['addItem']),
+    closeForm() {
+      this.formData = {};
+      this.dialog = false;
+    }
   }
 };
 </script>
