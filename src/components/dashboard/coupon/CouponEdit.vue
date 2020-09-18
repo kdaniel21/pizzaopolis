@@ -104,9 +104,10 @@ export default {
           this.updateCoupon(res.data.data);
           this.closeDialog();
         })
-        .catch(() =>
-          this.showSnackbar({ text: 'Coupon could not be updated!' })
-        );
+        .catch(err => {
+          this.showSnackbar({ text: 'Coupon could not be updated!' });
+          console.log(err);
+        });
     },
     closeDialog() {
       this.dialog = false;
