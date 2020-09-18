@@ -9,7 +9,13 @@
           </v-list-item-subtitle>
         </v-list-item-content>
 
-        {{ menuItem.price.toFixed(2) }}€
+        {{ menuItem.currentPrice.toFixed(2) }}€
+        <!-- SHOW NORMAL PRICE IF FOOD IS DISCOUNTED -->
+        <span
+          v-if="menuItem.discountedPrice"
+          class="ml-2 text-decoration-line-through"
+          >{{ menuItem.price.toFixed(2) }}€</span
+        >
         <v-list-item-action>
           <v-btn icon @click="addItem(menuItem)">
             <v-icon color="secondary">shopping_cart</v-icon>
