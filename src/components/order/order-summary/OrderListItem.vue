@@ -4,7 +4,7 @@
       <v-list-item-title>{{ order.name }}</v-list-item-title>
 
       <v-list-item-subtitle class="font-italic">
-        {{ order.quantity }}x - {{ order.price.toFixed(2) }}€
+        {{ order.quantity }}x - {{ order.currentPrice.toFixed(2) }}€
       </v-list-item-subtitle>
     </v-list-item-content>
     <!-- REMOVE BTN -->
