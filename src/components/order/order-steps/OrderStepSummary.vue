@@ -24,7 +24,6 @@
 
 <script>
 import axios from 'axios';
-import snakeCaseKeys from 'snakecase-keys';
 import { StripeCheckout } from 'vue-stripe-checkout';
 import OrderListSummary from '../order-summary/OrderListSummary';
 import OrderShippingSummary from '../order-summary/OrderShippingSummary';
@@ -41,8 +40,7 @@ export default {
   },
   data() {
     return {
-      stripePublicKey:
-        'pk_test_51H0LzUCEXtog51pQJC3I2MxRPOcdVk4oQEsmfrAhpVcT19syHp0asdqAYQT7B3LA4ZOKsCTwz9vH3YwRlQWyKOXS00JRQ6Kbst',
+      stripePublicKey: process.env('VUE_APP_STRIPE_PUBLIC_KEY'),
       sessionId: null
     };
   },
@@ -53,10 +51,7 @@ export default {
     ...mapMutations(['showSnackbar']),
     async createOrder() {
       try {
-        const res = await axios.post(
-          '/orders',
-          snakeCaseKeys(this.completeOrder)
-        );
+        const res = await axios.post('/orders', this.completeOrder);
         this.sessionId = res.data.sessionId;
         this.$refs.sessionRef.redirectToCheckout();
       } catch (err) {
