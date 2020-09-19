@@ -28,11 +28,11 @@ export default {
       return total - discount >= 0 ? total - discount : 0;
     },
     completeOrder: state => {
-      const food = state.orders.map(order => {
+      const foods = state.orders.map(order => {
         return { id: order.id, quantity: order.quantity };
       });
       return {
-        food,
+        foods,
         coupon: state.coupon ? state.coupon.code : null,
         shippingInformation: state.shippingInformation,
         billingInformation: state.billingInformation
