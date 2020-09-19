@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      stripePublicKey: process.env('VUE_APP_STRIPE_PUBLIC_KEY'),
+      stripePublicKey: process.env.VUE_APP_STRIPE_PUBLIC_KEY,
       sessionId: null
     };
   },
