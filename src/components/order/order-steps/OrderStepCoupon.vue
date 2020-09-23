@@ -33,8 +33,10 @@ export default {
     ...mapState('order', ['coupon'])
   },
   watch: {
-    coupon() {
-      this.couponInput = this.coupon.code;
+    coupon(val) {
+      if (val) {
+        this.couponInput = this.coupon.code;
+      }
     }
   },
   methods: {
